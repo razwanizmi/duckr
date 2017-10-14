@@ -4,8 +4,8 @@
   "description": "",
   "main": "actions.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
-    "production": "webpack -p"
+    "dev": "webpack-dev-server --open",
+    "postinstall": "webpack -p"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
     "html-webpack-plugin": "^2.30.1",

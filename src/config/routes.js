@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
-import { MainContainer } from "../containers";
+import { MainContainer } from "containers";
 
 const routes = (
   <BrowserRouter>
