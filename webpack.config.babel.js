@@ -26,7 +26,8 @@ const base = {
   entry: PATHS.app,
   output: {
     path: PATHS.build,
-    filename: "index_bundle.js"
+    filename: "index_bundle.js",
+    publicPath: "/"
   },
   module: {
     rules: [
@@ -58,7 +59,8 @@ const developmentConfig = {
     contentBase: PATHS.build,
     hot: true,
     inline: true,
-    progress: true
+    progress: true,
+    historyApiFallback: true
   },
   plugins: [HtmlWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()]
 };
