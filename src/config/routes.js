@@ -3,18 +3,22 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {
   MainContainer,
   HomeContainer,
-  AuthenticateContainer
+  AuthenticateContainer,
+  FeedContainer,
+  LogoutContainer
 } from "containers";
 
-const routes = (
+const getRoutes = checkAuth => (
   <BrowserRouter>
     <MainContainer>
       <Switch>
-        <Route path="/auth" component={AuthenticateContainer} />
-        <Route component={HomeContainer} />
+        <Route exact path="/" component={checkAuth(HomeContainer)} />
+        <Route path="/auth" component={checkAuth(AuthenticateContainer)} />
+        <Route path="/feed" component={checkAuth(FeedContainer)} />
+        <Route path="/logout" component={LogoutContainer} />
       </Switch>
     </MainContainer>
   </BrowserRouter>
 );
 
-export default routes;
+export default getRoutes;

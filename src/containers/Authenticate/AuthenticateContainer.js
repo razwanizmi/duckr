@@ -13,8 +13,14 @@ class AuthenticateContainer extends Component {
     fetchAndHandleAuthedUser: PropTypes.func.isRequired
   };
 
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+
   handleAuth = () => {
-    this.props.fetchAndHandleAuthedUser();
+    this.props.fetchAndHandleAuthedUser().then(() => {
+      this.context.router.history.replace("/feed");
+    });
   };
 
   render() {
