@@ -5,7 +5,8 @@
   "main": "actions.js",
   "scripts": {
     "dev": "webpack-dev-server --open",
-    "postinstall": "webpack -p"
+    "postinstall": "webpack -p",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
