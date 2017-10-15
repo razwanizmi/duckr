@@ -1,10 +1,12 @@
+import auth from "helpers/auth";
+
 const AUTH_USER = "AUTH_USER";
 const UNAUTH_USER = "UNAUTH_USER";
 const FETCHING_USER = "FETCHING_USER";
 const FETCHING_USER_FAILURE = "FETCHING_USER_FAILURE";
 const FETCHING_USER_SUCCESS = "FETCHING_USER_SUCCESS";
 
-export const authUser = uid => {
+const authUser = uid => {
   return {
     type: AUTH_USER,
     uid
@@ -17,25 +19,39 @@ const unauthUser = () => {
   };
 };
 
-export const fetchingUser = () => {
+const fetchingUser = () => {
   return {
     type: FETCHING_USER
   };
 };
 
-export const fetchingUserFailure = error => {
+const fetchingUserFailure = error => {
   return {
     type: FETCHING_USER_FAILURE,
     error: "Error fetching user"
   };
 };
 
-export const fetchingUserSuccess = (uid, user, timestamp) => {
+const fetchingUserSuccess = (uid, user, timestamp) => {
   return {
     type: FETCHING_USER_SUCCESS,
     uid,
     user,
     timestamp
+  };
+};
+
+export const fetchAndHandleAuthedUser = () => {
+  return dispatch => {
+    dispatch(fetchingUser());
+    auth()
+      .then(user => {
+        dispatch(fetchingUserSuccess(user.uid, user, Date.now()));
+        dispatch(authUser(user.uid));
+      })
+      .catch(error => {
+        dispatch(fetchingUserFailure());
+      });
   };
 };
 

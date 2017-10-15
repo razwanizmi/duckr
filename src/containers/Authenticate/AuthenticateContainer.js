@@ -10,22 +10,11 @@ class AuthenticateContainer extends Component {
   static propTypes = {
     isFetching: PropTypes.bool.isRequired,
     error: PropTypes.string.isRequired,
-    authUser: PropTypes.func.isRequired,
-    fetchingUser: PropTypes.func.isRequired,
-    fetchingUserFailure: PropTypes.func.isRequired,
-    fetchingUserSuccess: PropTypes.func.isRequired
+    fetchAndHandleAuthedUser: PropTypes.func.isRequired
   };
 
   handleAuth = () => {
-    this.props.fetchingUser();
-    auth()
-      .then(user => {
-        this.props.fetchingUserSuccess(user.uid, user, Date.now());
-        this.props.authUser(user.uid);
-      })
-      .catch(error => {
-        this.props.fetchingUserFailure();
-      });
+    this.props.fetchAndHandleAuthedUser();
   };
 
   render() {
