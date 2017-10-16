@@ -5,6 +5,10 @@ import { checkIfAuthed } from "./auth";
 export default (BaseComponent, store) => {
   class Restricted extends Component {
     checkAuthentication = ({ history }) => {
+      if (store.getState().isFetching) {
+        return;
+      }
+
       const nextPathName = history.location.pathname;
       const isAuthed = checkIfAuthed(store);
       if (nextPathName === "/" || nextPathName === "/auth") {
