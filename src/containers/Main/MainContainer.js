@@ -29,7 +29,7 @@ class MainContainer extends Component {
         const userInfo = formatUserInfo(
           userData.displayName,
           userData.photoURL,
-          userData.uid
+          user.uid
         );
         this.props.authUser(userInfo.uid);
         this.props.fetchingUserSuccess(userInfo.uid, userInfo, Date.now());
