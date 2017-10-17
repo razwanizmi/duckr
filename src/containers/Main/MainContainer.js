@@ -52,10 +52,10 @@ class MainContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ users }) => {
   return {
-    isAuthed: state.isAuthed,
-    isFetching: state.isFetching
+    isAuthed: users.isAuthed,
+    isFetching: users.isFetching
   };
 };
 

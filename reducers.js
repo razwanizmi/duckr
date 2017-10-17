@@ -30,7 +30,7 @@ const users = (state = initialState, action) => {
     case AUTH_USER:
       return { ...state, isAuthed: true, authedId: action.uid };
     case UNAUTH_USER:
-      return { ...state, isAuthed: false, authId: "" };
+      return { ...state, isAuthed: false, authedId: "" };
     case FETCHING_USER:
       return { ...state, isFetching: true };
     case FETCHING_USER_FAILURE:

@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import getRoutes from "./config/routes";
 import restricted from "helpers/restricted";
-import users from "redux/modules/users";
+import * as reducers from "redux/modules";
 
 const store = createStore(
-  users,
+  combineReducers(reducers),
   compose(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f

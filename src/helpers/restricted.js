@@ -5,7 +5,7 @@ import { checkIfAuthed } from "./auth";
 export default (BaseComponent, store) => {
   class Restricted extends Component {
     checkAuthentication = ({ history }) => {
-      if (store.getState().isFetching) {
+      if (store.getState().users.isFetching) {
         return;
       }
 

@@ -8,7 +8,7 @@ const auth = () => {
 
 export default auth;
 
-export const checkIfAuthed = store => store.getState().isAuthed;
+export const checkIfAuthed = store => store.getState().users.isAuthed;
 
 export const logout = () => {
   return firebaseAuth().signOut();
