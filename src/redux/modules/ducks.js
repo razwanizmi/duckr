@@ -57,7 +57,7 @@ export const duckFanOut = duck => {
   };
 };
 
-const addMultipleDucks = ducks => {
+export const addMultipleDucks = ducks => {
   return {
     type: ADD_MULTIPLE_DUCKS,
     ducks
