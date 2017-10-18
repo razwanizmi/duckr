@@ -10,6 +10,7 @@ class FeedContainer extends Component {
     newDucksAvailable: PropTypes.bool.isRequired,
     error: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired,
+    duckIds: PropTypes.array.isRequired,
     setAndHandleFeedListener: PropTypes.func.isRequired,
     resetNewDucksAvailable: PropTypes.func.isRequired
   };
@@ -24,6 +25,7 @@ class FeedContainer extends Component {
         newDucksAvailable={this.props.newDucksAvailable}
         error={this.props.error}
         isFetching={this.props.isFetching}
+        duckIds={this.props.duckIds}
         resetNewDucksAvailable={this.props.resetNewDucksAvailable}
       />
     );
@@ -31,12 +33,13 @@ class FeedContainer extends Component {
 }
 
 const mapStateToProps = ({ feed }) => {
-  const { newDucksAvailable, isFetching, error } = feed;
+  const { newDucksAvailable, error, isFetching, duckIds } = feed;
 
   return {
     newDucksAvailable,
+    error,
     isFetching,
-    error
+    duckIds
   };
 };
 

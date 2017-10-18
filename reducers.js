@@ -148,7 +148,7 @@ const initialState = {
   error: ""
 };
 
-const userLikes = (state = initialState, action) => {
+const usersLikes = (state = initialState, action) => {
   switch (action.type) {
     case FETCHING_LIKES:
       return { ...state, isFetching: true };

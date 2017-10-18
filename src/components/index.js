@@ -5,3 +5,4 @@ export FacebookAuthButton from "./FacebookAuthButton/FacebookAuthButton";
 export Feed from "./Feed/Feed";
 export Logout from "./Logout/Logout";
 export Modal from "./Modal/Modal.js";
+export Duck from "./Duck/Duck.js";
