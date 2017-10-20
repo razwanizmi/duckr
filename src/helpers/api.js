@@ -38,3 +38,30 @@ export const listenToFeed = (callback, errorCallback) => {
     errorCallback
   );
 };
+
+export const fetchUsersLikes = uid => {
+  return ref
+    .child(`usersLikes/${uid}`)
+    .once("value")
+    .then(snapshot => snapshot.val() || {});
+};
+
+export const saveToUsersLikes = (uid, duckId) => {
+  return ref.child(`usersLikes/${uid}/${duckId}`).set(true);
+};
+
+export const deleteFromUsersLIkes = (uid, duckId) => {
+  return ref.child(`usersLikes/${uid}/${duckId}`).set(null);
+};
+
+export const incrementNumberOfLikes = duckId => {
+  return ref
+    .child(`likeCount/${duckId}`)
+    .transaction((currentValue = 0) => currentValue + 1);
+};
+
+export const decrementNumberOfLikes = duckId => {
+  return ref
+    .child(`likeCount/${duckId}`)
+    .transaction((currentValue = 0) => currentValue - 1);
+};

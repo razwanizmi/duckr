@@ -1,3 +1,11 @@
+import {
+  fetchUsersLikes,
+  saveToUsersLikes,
+  deleteFromUsersLikes,
+  incrementNumberOfLikes,
+  decrementNumberOfLikes
+} from "helpers/api";
+
 const FETCHING_LIKES = "FETCHING_LIKES";
 const FETCHING_LIKES_ERROR = "FETCHING_LIKES_ERROR";
 const FETCHING_LIKES_SUCCESS = "FETCHING_LIKES_SUCCESS";
@@ -35,6 +43,42 @@ const removeLike = duckId => {
   return {
     type: REMOVE_LIKE,
     duckId
+  };
+};
+
+export const addAndHandleLike = (duckId, e) => {
+  e.stopPropagation();
+
+  return (dispatch, getState) => {
+    dispatch(addLike(duckId));
+
+    const uid = getState().users.audhedId;
+
+    Promise.all([
+      saveToUsersLikes(uid, duckId),
+      incrementNumberOfLikes(duckId)
+    ]).catch(error => {
+      console.warn(error);
+      dispatch(removeLike(duckId));
+    });
+  };
+};
+
+export const handleDeleteLike = (duckId, e) => {
+  e.stopPropagation();
+
+  return (dispatch, getState) => {
+    dispatch(removeLike(duckId));
+
+    const uid = getState().users.authedId;
+
+    Promise.all([
+      deleteFromUsersLikes(uid, duckId),
+      decrementNumberOfLikes(duckId)
+    ]).catch(error => {
+      console.warn(error);
+      dispatch(addLike(duckId));
+    });
   };
 };
 
