@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import * as userActionCreators from "redux/modules/users";
+import * as usersLikesActionCreators from "redux/modules/usersLikes";
 import { Navigation } from "components";
 import { formatUserInfo } from "helpers/utils";
 import { firebaseAuth } from "config/constants";
@@ -15,7 +16,8 @@ class MainContainer extends Component {
     isFetching: PropTypes.bool.isRequired,
     authUser: PropTypes.func.isRequired,
     fetchingUserSuccess: PropTypes.func.isRequired,
-    removeFetchingUser: PropTypes.func.isRequired
+    removeFetchingUser: PropTypes.func.isRequired,
+    setUsersLikes: PropTypes.func.isRequired
   };
 
   static contextTypes = {
@@ -33,6 +35,7 @@ class MainContainer extends Component {
         );
         this.props.authUser(userInfo.uid);
         this.props.fetchingUserSuccess(userInfo.uid, userInfo, Date.now());
+        this.props.setUsersLikes();
         if (this.props.location.pathName === "/") {
           this.context.router.history.replace("/feed");
         }
@@ -60,7 +63,10 @@ const mapStateToProps = ({ users }) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(userActionCreators, dispatch);
+  return bindActionCreators(
+    { ...userActionCreators, ...usersLikesActionCreators },
+    dispatch
+  );
 };
 
 export default withRouter(
