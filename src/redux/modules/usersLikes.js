@@ -52,7 +52,7 @@ export const addAndHandleLike = (duckId, e) => {
   return (dispatch, getState) => {
     dispatch(addLike(duckId));
 
-    const uid = getState().users.audhedId;
+    const uid = getState().users.authedId;
 
     Promise.all([
       saveToUsersLikes(uid, duckId),

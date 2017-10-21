@@ -50,7 +50,7 @@ export const saveToUsersLikes = (uid, duckId) => {
   return ref.child(`usersLikes/${uid}/${duckId}`).set(true);
 };
 
-export const deleteFromUsersLIkes = (uid, duckId) => {
+export const deleteFromUsersLikes = (uid, duckId) => {
   return ref.child(`usersLikes/${uid}/${duckId}`).set(null);
 };
 

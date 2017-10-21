@@ -50,9 +50,9 @@ const likeCount = (state = initialState, action) => {
       return { ...state, ...initialState, [action.duckId]: action.count };
     case ADD_LIKE:
     case REMOVE_LIKE:
-      return typeOf(action.duckId) === "undefined"
+      return typeof(action.duckId) === "undefined"
         ? state
-        : { ...state, [action.duckId]: count(state.action[duckId], action) };
+        : { ...state, [action.duckId]: count(state[action.duckId], action) };
     default:
       return state;
   }

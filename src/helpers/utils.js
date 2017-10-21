@@ -10,6 +10,11 @@ export const formatDuck = (text, { name, avatar, uid }) => {
     name,
     avatar,
     uid,
-    timeStamp: Date.now()
+    timestamp: Date.now()
   };
+};
+
+export const formatTimestamp = timestamp => {
+  const date = new Date(timestamp);
+  return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 };
