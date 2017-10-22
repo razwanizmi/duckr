@@ -65,3 +65,17 @@ export const decrementNumberOfLikes = duckId => {
     .child(`likeCount/${duckId}`)
     .transaction((currentValue = 0) => currentValue - 1);
 };
+
+export const fetchUser = uid => {
+  return ref
+    .child(`users/${uid}`)
+    .once("value")
+    .then(snapshot => snapshot.val());
+};
+
+export const fetchUsersDucks = uid => {
+  return ref
+    .child(`usersDucks/${uid}`)
+    .once("value")
+    .then(snapshot => snapshot.val() || {});
+};

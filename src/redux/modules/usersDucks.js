@@ -1,3 +1,6 @@
+import { addMultipleDucks } from "redux/modules/ducks";
+import { fetchUsersDucks } from "helpers/api";
+
 const FETCHING_USERS_DUCKS = "FETCHING_USERS_DUCKS";
 const FETCHING_USERS_DUCKS_ERROR = "FETCHING_USERS_DUCKS_ERROR";
 const FETCHING_USERS_DUCKS_SUCCESS = "FETCHING_USERS_DUCKS_SUCCESS";
@@ -17,7 +20,7 @@ const fetchingUsersDucksError = error => {
   };
 };
 
-const fetchingUsersDucksSuccess = (uid, duckIds, lasUpdated) => {
+const fetchingUsersDucksSuccess = (uid, duckIds, lastUpdated) => {
   return {
     type: FETCHING_USERS_DUCKS_SUCCESS,
     uid,
@@ -31,6 +34,27 @@ export const addSingleUsersDuck = (uid, duckId) => {
     type: ADD_SINGLE_USERS_DUCK,
     uid,
     duckId
+  };
+};
+
+export const fetchAndHandleUsersDucks = uid => {
+  return dispatch => {
+    dispatch(fetchingUsersDucks());
+
+    fetchUsersDucks(uid)
+      .then(ducks => dispatch(addMultipleDucks(ducks)))
+      .then(({ ducks }) =>
+        dispatch(
+          fetchingUsersDucksSuccess(
+            uid,
+            Object.keys(ducks).sort(
+              (a, b) => ducks[b].timestamp - ducks[a].timestamp
+            ),
+            Date.now()
+          )
+        )
+      )
+      .catch(error => dispatch(fetchingUsersDucksError(error)));
   };
 };
 
@@ -66,7 +90,7 @@ const usersDucks = (state = initialState, action) => {
         error: "",
         [action.uid]: {
           lastUpdated: action.lastUpdated,
-          duckIds: action.ducksIds
+          duckIds: action.duckIds
         }
       };
     case ADD_SINGLE_USERS_DUCK:
