@@ -79,3 +79,17 @@ export const fetchUsersDucks = uid => {
     .once("value")
     .then(snapshot => snapshot.val() || {});
 };
+
+export const fetchDuck = duckId => {
+  return ref
+    .child(`ducks/${duckId}`)
+    .once("value")
+    .then(snapshot => snapshot.val());
+};
+
+export const fetchLikeCount = duckId => {
+  return ref
+    .child(`likeCount/${duckId}`)
+    .once("value")
+    .then(snapshot => snapshot.val() || 0);
+};

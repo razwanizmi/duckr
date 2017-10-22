@@ -1,4 +1,4 @@
-import { saveDuck } from "helpers/api";
+import { saveDuck, fetchDuck } from "helpers/api";
 import { closeModal } from "./modal";
 import { addSingleUsersDuck } from "./usersDucks";
 
@@ -30,7 +30,7 @@ const fetchingDuckSuccess = duck => {
   };
 };
 
-const removeFetching = () => {
+export const removeFetching = () => {
   return {
     type: REMOVE_FETCHING
   };
@@ -62,6 +62,16 @@ export const addMultipleDucks = ducks => {
   return {
     type: ADD_MULTIPLE_DUCKS,
     ducks
+  };
+};
+
+export const fetchAndHandleDuck = duckId => {
+  return dispatch => {
+    dispatch(fetchingDuck());
+
+    fetchDuck(duckId)
+      .then(duck => dispatch(fetchingDuckSuccess(duck)))
+      .catch(error => dispatch(fetchingDuckError(error)));
   };
 };
 

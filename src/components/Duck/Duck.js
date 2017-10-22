@@ -25,7 +25,7 @@ const Duck = props => {
   return (
     <div
       className={duckContainer}
-      style={{ cursor: props.hideReplyButton ? "default" : "pointer" }}
+      style={{ cursor: props.hideReplyBtn ? "default" : "pointer" }}
       onClick={props.onClick}
     >
       <img src={props.duck.avatar} className={avatar} />
@@ -38,7 +38,7 @@ const Duck = props => {
         </div>
         <div className={text}>{props.duck.text}</div>
         <div className={likeReplyContainer}>
-          {props.hideReplyButton ? null : <Reply className={icon} />}
+          {props.hideReplyBtn ? null : <Reply className={icon} />}
           <div className={actionContainer}>
             <Star
               className={starIcon}

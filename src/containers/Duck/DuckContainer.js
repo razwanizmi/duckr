@@ -51,7 +51,7 @@ class DuckContainer extends Component {
 const mapStateToProps = ({ ducks, likeCount, usersLikes }, props) => {
   return {
     duck: ducks[props.duckId],
-    hideLikeCount: props.hideLikecount,
+    hideLikeCount: props.hideLikeCount,
     hideReplyBtn: props.hideReplyBtn,
     isLiked: usersLikes[props.duckId] === true,
     numberOfLikes: likeCount[props.duckId]
