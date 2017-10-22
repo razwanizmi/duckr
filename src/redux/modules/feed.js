@@ -15,9 +15,10 @@ const settingFeedListener = () => {
 };
 
 const settingFeedListenerError = error => {
+  console.warn(error);
   return {
     type: SETTING_FEED_LISTENER_ERROR,
-    error: error
+    error: "Error setting feed listener"
   };
 };
 

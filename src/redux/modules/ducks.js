@@ -16,9 +16,10 @@ const fetchingDuck = () => {
 };
 
 const fetchingDuckError = error => {
+  console.warn(error);
   return {
     type: FETCHING_DUCK_ERROR,
-    error: error
+    error: "Error fetching duck"
   };
 };
 

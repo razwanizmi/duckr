@@ -10,9 +10,10 @@ const fetchingCount = () => {
 };
 
 const fetchingCountError = error => {
+  console.warn(error);
   return {
     type: FETCHING_COUNT_ERROR,
-    error
+    error: "Error fetching like count"
   };
 };
 
@@ -50,7 +51,7 @@ const likeCount = (state = initialState, action) => {
       return { ...state, ...initialState, [action.duckId]: action.count };
     case ADD_LIKE:
     case REMOVE_LIKE:
-      return typeof(action.duckId) === "undefined"
+      return typeof action.duckId === "undefined"
         ? state
         : { ...state, [action.duckId]: count(state[action.duckId], action) };
     default:

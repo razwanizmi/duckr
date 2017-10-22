@@ -29,9 +29,10 @@ const fetchingUser = () => {
 };
 
 const fetchingUserFailure = error => {
+  console.warn(error);
   return {
     type: FETCHING_USER_FAILURE,
-    error: error
+    error: "Error fetching user"
   };
 };
 
