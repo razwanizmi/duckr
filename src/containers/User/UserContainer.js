@@ -54,8 +54,8 @@ const mapStateToProps = ({ users, usersDucks }, props) => {
   return {
     noUser,
     name: noUser ? "" : user.info.name,
-    isFetching: user.isFetching || usersDucks.isFetching,
-    error: user.error || usersDucks.error,
+    isFetching: users.isFetching || usersDucks.isFetching,
+    error: users.error || usersDucks.error,
     duckIds: specificUsersDucks ? specificUsersDucks.duckIds : [],
     lastUpdatedUser: user ? user.lastUpdated : 0,
     lastUpdatedDucks: specificUsersDucks ? specificUsersDucks.lastUpdated : 0
