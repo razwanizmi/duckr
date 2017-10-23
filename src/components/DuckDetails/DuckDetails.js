@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { DuckContainer } from "containers";
+import { formatReply } from "helpers/utils";
 import {
   mainContainer,
   container,
@@ -11,7 +12,43 @@ import {
 } from "./styles.css";
 import { subHeader, darkBtn, errorMsg } from "sharedStyles/styles.css";
 
-const DuckDetails = ({ duckId, isFetching, authedUser, error }) => {
+const Reply = ({ submit }) => {
+  const handleSubmit = e => {
+    if (Reply.ref.value.length === 0) {
+      return;
+    }
+
+    submit(Reply.ref.value, e);
+    Reply.ref.value = "";
+  };
+
+  return (
+    <div className={replyTextAreaContainer}>
+      <textarea
+        ref={ref => (Reply.ref = ref)}
+        className={replyTextArea}
+        maxLength={140}
+        placeholder="Your response"
+        type="text"
+      />
+      <button onClick={handleSubmit} className={darkBtn}>
+        Submit
+      </button>
+    </div>
+  );
+};
+
+Reply.propTypes = {
+  submit: PropTypes.func.isRequired
+};
+
+const DuckDetails = ({
+  duckId,
+  isFetching,
+  authedUser,
+  error,
+  addAndHandleReply
+}) => {
   return (
     <div className={mainContainer}>
       {isFetching ? (
@@ -24,11 +61,12 @@ const DuckDetails = ({ duckId, isFetching, authedUser, error }) => {
               hideLikeCount={false}
               hideReplyBtn={true}
             />
-            Make a Reply
+            <Reply
+              submit={replyText =>
+                addAndHandleReply(duckId, formatReply(authedUser, replyText))}
+            />
           </div>
-          <div className={repliesContainer}>
-            Reply Section
-          </div>
+          <div className={repliesContainer}>Reply Section</div>
         </div>
       )}
       {error && <p className={error}>{error}</p>}
@@ -40,7 +78,8 @@ DuckDetails.propTypes = {
   authedUser: PropTypes.object.isRequired,
   duckId: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired
+  error: PropTypes.string.isRequired,
+  addAndHandleReply: PropTypes.func.isRequired
 };
 
 export default DuckDetails;

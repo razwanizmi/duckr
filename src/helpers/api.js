@@ -93,3 +93,17 @@ export const fetchLikeCount = duckId => {
     .once("value")
     .then(snapshot => snapshot.val() || 0);
 };
+
+export const postReply = (duckId, reply) => {
+  const replyId = ref.child(`replies/${duckId}`).push().key;
+  const replyWithId = { ...reply, replyId };
+
+  const replyPromise = ref
+    .child(`replies/${duckId}/${replyId}`)
+    .set(replyWithId);
+
+  return {
+    replyWithId,
+    replyPromise
+  };
+};
