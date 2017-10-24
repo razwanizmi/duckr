@@ -22,7 +22,7 @@ const fetchingLikesError = error => {
   console.warn(error);
   return {
     type: FETCHING_LIKES_ERROR,
-    error: "Error fetching user's likes"
+    error: "Error fetching user's likes."
   };
 };
 

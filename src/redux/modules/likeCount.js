@@ -15,7 +15,7 @@ const fetchingCountError = error => {
   console.warn(error);
   return {
     type: FETCHING_COUNT_ERROR,
-    error: "Error fetching like count"
+    error: "Error fetching like count."
   };
 };
 

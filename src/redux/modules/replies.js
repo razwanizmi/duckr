@@ -1,4 +1,4 @@
-import { postReply } from "helpers/api";
+import { postReply, fetchReplies } from "helpers/api";
 
 const FETCHING_REPLIES = "FETCHING_REPLIES";
 const FETCHING_REPLIES_ERROR = "FETCHING_REPLIES_ERROR";
@@ -17,11 +17,11 @@ const fetchingRepliesError = error => {
   console.warn(error);
   return {
     type: FETCHING_REPLIES_ERROR,
-    error: "Error fetching replies"
+    error: "Error fetching replies."
   };
 };
 
-const fetchingRepliesSuccess = (replies, duckId) => {
+const fetchingRepliesSuccess = (duckId, replies) => {
   return {
     type: FETCHING_REPLIES_SUCCESS,
     replies,
@@ -63,6 +63,16 @@ export const addAndHandleReply = (duckId, reply) => {
       dispatch(removeReply(duckId, replyWithId.replyId));
       dispatch(addReplyError(error));
     });
+  };
+};
+
+export const fetchAndHandleReplies = duckId => {
+  return dispatch => {
+    dispatch(fetchingReplies());
+
+    fetchReplies(duckId)
+      .then(replies => dispatch(fetchingRepliesSuccess(duckId, replies)))
+      .catch(error => fetchingRepliesError(error));
   };
 };
 

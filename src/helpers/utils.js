@@ -1,6 +1,7 @@
 import {
   userExpirationLength,
-  usersDucksExpirationLength
+  usersDucksExpirationLength,
+  repliesExpirationLength
 } from "config/constants";
 
 export const formatUserInfo = (name, avatar, uid) => ({
@@ -34,6 +35,10 @@ export const staleUser = timestamp => {
 
 export const staleDucks = timestamp => {
   return getMilliseconds(timestamp) > usersDucksExpirationLength;
+};
+
+export const staleReplies = timestamp => {
+  return getMilliseconds(timestamp) > repliesExpirationLength;
 };
 
 export const formatReply = ({ name, avatar, uid }, reply) => {

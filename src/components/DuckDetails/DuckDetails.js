@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { DuckContainer } from "containers";
+import { DuckContainer, RepliesContainer } from "containers";
 import { formatReply } from "helpers/utils";
 import {
   mainContainer,
@@ -66,7 +66,9 @@ const DuckDetails = ({
                 addAndHandleReply(duckId, formatReply(authedUser, replyText))}
             />
           </div>
-          <div className={repliesContainer}>Reply Section</div>
+          <div className={repliesContainer}>
+            <RepliesContainer duckId={duckId} />
+          </div>
         </div>
       )}
       {error && <p className={error}>{error}</p>}

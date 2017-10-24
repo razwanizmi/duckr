@@ -17,7 +17,7 @@ const fetchingUsersDucksError = error => {
   console.warn(error);
   return {
     type: FETCHING_USERS_DUCKS_ERROR,
-    error: "Error fetching user's ducks"
+    error: "Error fetching user's ducks."
   };
 };
 
